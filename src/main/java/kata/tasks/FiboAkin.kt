@@ -1,4 +1,4 @@
-package kata.Tasks
+package kata.tasks
 
 import kotlin.test.assertEquals
 
