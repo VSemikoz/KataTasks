@@ -30,7 +30,6 @@ the sum of the numbers for which 5 is a factor is 0 so we have [5, 0] in the res
 In Fortran - as in any other language - the returned string is not permitted to contain
 any redundant trailing whitespace: you can use dynamically allocated character strings.
  */
-
 object SumByFactors {
     fun sumOfDivided(l: IntArray): String {
         var result = ""

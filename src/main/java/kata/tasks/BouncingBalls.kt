@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.BouncingBalls.bouncingBall
 import kotlin.test.assertEquals
 
 /**
@@ -17,16 +18,20 @@ Float parameter "bounce" must be greater than 0 and less than 1
 Float parameter "window" must be less than h.
 If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
  */
-fun bouncingBall(h: Double, bounce: Double, window: Double): Int {
-    if (h <= 0 || bounce <= 0.0 || bounce >= 1.0 || window >= h) return -1
-    var result = 1
-    var currHigh = h
-    while (currHigh * bounce > window) {
-        currHigh *= bounce
-        result += 2
+object BouncingBalls {
+
+    fun bouncingBall(h: Double, bounce: Double, window: Double): Int {
+        if (h <= 0 || bounce <= 0.0 || bounce >= 1.0 || window >= h) return -1
+        var result = 1
+        var currHigh = h
+        while (currHigh * bounce > window) {
+            currHigh *= bounce
+            result += 2
+        }
+        return result
     }
-    return result
 }
+
 
 fun main() {
     assertEquals(3, bouncingBall(3.0, 0.66, 1.5))

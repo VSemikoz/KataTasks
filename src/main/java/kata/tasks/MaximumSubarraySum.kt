@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.MaximumSubarraySum.maxSequence
 import kotlin.test.assertEquals
 
 /**
@@ -11,16 +12,20 @@ Easy case is when the list is made up of only positive numbers and the maximum s
 
 Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.
  */
-fun maxSequence(arr: List<Int>): Int {
-    var maxSoFar = 0
-    var maxEndingHere = 0
-    arr.forEach {
-        maxEndingHere += it
-        if (maxSoFar < maxEndingHere) maxSoFar = maxEndingHere
-        if (maxEndingHere < 0) maxEndingHere = 0
+object MaximumSubarraySum {
+
+    fun maxSequence(arr: List<Int>): Int {
+        var maxSoFar = 0
+        var maxEndingHere = 0
+        arr.forEach {
+            maxEndingHere += it
+            if (maxSoFar < maxEndingHere) maxSoFar = maxEndingHere
+            if (maxEndingHere < 0) maxEndingHere = 0
+        }
+        return maxSoFar
     }
-    return maxSoFar
 }
+
 
 fun main() {
     assertEquals(0, maxSequence(emptyList()))

@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.RGBToHexConversion.rgb
 import java.lang.Integer.toHexString
 import kotlin.test.assertEquals
 
@@ -17,18 +18,21 @@ rgb(255, 255, 300) // returns FFFFFF
 rgb(0, 0, 0) // returns 000000
 rgb(148, 0, 211) // returns 9400D3
  */
+object RGBToHexConversion {
 
-fun rgb(r: Int, g: Int, b: Int): String = "${r.toHex()}${g.toHex()}${b.toHex()}"
+    fun rgb(r: Int, g: Int, b: Int): String = "${r.toHex()}${g.toHex()}${b.toHex()}"
 
-fun Int.toHex(): String {
-    val result = toHexString(this).toUpperCase()
-    return when {
-        this < 0 -> "00"
-        result.length == 1 -> "0$result"
-        result.length > 2 -> "FF"
-        else -> result
+    fun Int.toHex(): String {
+        val result = toHexString(this).toUpperCase()
+        return when {
+            this < 0 -> "00"
+            result.length == 1 -> "0$result"
+            result.length > 2 -> "FF"
+            else -> result
+        }
     }
 }
+
 
 fun main() {
     assertEquals("000000", rgb(0, 0, 0))

@@ -1,5 +1,11 @@
 package kata.tasks
 
+import kata.tasks.ReducingBySteps.gcdi
+import kata.tasks.ReducingBySteps.lcmu
+import kata.tasks.ReducingBySteps.maxi
+import kata.tasks.ReducingBySteps.mini
+import kata.tasks.ReducingBySteps.operArray
+import kata.tasks.ReducingBySteps.som
 import java.lang.Math.*
 import java.util.*
 import java.util.function.LongBinaryOperator
@@ -38,25 +44,29 @@ oper_array(sum, a, 0) => [18, 87, -3, -81, -16, 24]
 oper_array(min, a, a[0]) => [18, 18, -90, -90, -90, -90]
 oper_array(max, a, a[0]) => [18, 69, 69, 69, 69, 69]
  */
-fun gcdi(xx: Long, yy: Long): Long = if (yy == 0L) abs(xx) else gcdi(yy, xx % yy)
+object ReducingBySteps {
 
-fun lcmu(a: Long, b: Long): Long = abs(a * b) / gcdi(a, b)
+    fun gcdi(xx: Long, yy: Long): Long = if (yy == 0L) abs(xx) else gcdi(yy, xx % yy)
 
-fun som(a: Long, b: Long): Long = a + b
+    fun lcmu(a: Long, b: Long): Long = abs(a * b) / gcdi(a, b)
 
-fun maxi(a: Long, b: Long): Long = max(a, b)
+    fun som(a: Long, b: Long): Long = a + b
 
-fun mini(a: Long, b: Long): Long = min(a, b)
+    fun maxi(a: Long, b: Long): Long = max(a, b)
 
-fun operArray(fct: LongBinaryOperator, arr: LongArray, init: Long): LongArray {
-    val result = LongArray(arr.size)
-    var buf = init
-    arr.forEachIndexed { i, elem ->
-        result[i] = fct.applyAsLong(buf, elem)
-        buf = result[i]
+    fun mini(a: Long, b: Long): Long = min(a, b)
+
+    fun operArray(fct: LongBinaryOperator, arr: LongArray, init: Long): LongArray {
+        val result = LongArray(arr.size)
+        var buf = init
+        arr.forEachIndexed { i, elem ->
+            result[i] = fct.applyAsLong(buf, elem)
+            buf = result[i]
+        }
+        return result
     }
-    return result
 }
+
 
 fun main() {
     println("Fixed Tests operArray : gcdi, lcmu, som, mini, maxi")
@@ -65,19 +75,19 @@ fun main() {
     testing(Arrays.toString(operArray(LongBinaryOperator({ x, y -> gcdi(x, y) }), a, a[0])),
             Arrays.toString(r))
     r = longArrayOf(18, 414, 2070, 26910, 26910, 107640)
-    testing(Arrays.toString(operArray(LongBinaryOperator({ a, b -> lcmu(a, b) }), a, a[0])),
+    testing(Arrays.toString(operArray(LongBinaryOperator({ a1, b1 -> lcmu(a1, b1) }), a, a[0])),
             Arrays.toString(r))
     r = longArrayOf(18, 87, -3, -81, -16, 24)
-    testing(Arrays.toString(operArray(LongBinaryOperator({ a, b -> som(a, b) }), a, 0)),
+    testing(Arrays.toString(operArray(LongBinaryOperator({ a2, b2 -> som(a2, b2) }), a, 0)),
             Arrays.toString(r))
     r = longArrayOf(18, 18, -90, -90, -90, -90)
-    testing(Arrays.toString(operArray(LongBinaryOperator({ a, b -> mini(a, b) }), a, a[0])),
+    testing(Arrays.toString(operArray(LongBinaryOperator({ a3, b3 -> mini(a3, b3) }), a, a[0])),
             Arrays.toString(r))
     r = longArrayOf(18, 69, 69, 69, 69, 69)
-    testing(Arrays.toString(operArray(LongBinaryOperator({ a, b -> maxi(a, b) }), a, a[0])),
+    testing(Arrays.toString(operArray(LongBinaryOperator({ a4, b4 -> maxi(a4, b4) }), a, a[0])),
             Arrays.toString(r))
 }
 
-private fun testing(actual:String, expected:String) {
+private fun testing(actual: String, expected: String) {
     assertEquals(expected, actual)
 }

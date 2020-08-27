@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.BuddyPairs.buddy
 import kotlin.math.sqrt
 import kotlin.test.assertEquals
 
@@ -28,27 +29,30 @@ or
 buddy(10, 50) returns "(48 75)"
 buddy(48, 50) returns "(48 75)"
  */
+object BuddyPairs {
 
-fun buddy(start: Long, limit: Long): String {
-    (start..limit).forEach { i ->
-        val firstSum = getDivisors(i).sum()
-        val secondValue = firstSum - 1
-        val secondSum = getDivisors(secondValue).sum()
-        if (isBuddy(firstSum, secondValue) && isBuddy(secondSum, i) && i < secondValue) return "($i $secondValue)"
+    fun buddy(start: Long, limit: Long): String {
+        (start..limit).forEach { i ->
+            val firstSum = getDivisors(i).sum()
+            val secondValue = firstSum - 1
+            val secondSum = getDivisors(secondValue).sum()
+            if (isBuddy(firstSum, secondValue) && isBuddy(secondSum, i) && i < secondValue) return "($i $secondValue)"
+        }
+        return "Nothing"
     }
-    return "Nothing"
+
+    fun isBuddy(sum: Long, value: Long): Boolean = sum - 1 == value
+
+    fun getDivisors(n: Long): LongArray {
+        val result: MutableList<Long> = mutableListOf()
+        (1..(sqrt(n.toDouble())).toLong()).forEach { i ->
+            if (n % i == 0L) result.addAll(arrayOf(i, n / i))
+        }
+        result.remove(n)
+        return result.toSet().toLongArray()
+    }
 }
 
-fun isBuddy(sum: Long, value: Long): Boolean = sum - 1 == value
-
-fun getDivisors(n: Long): LongArray {
-    val result: MutableList<Long> = mutableListOf()
-    (1..(sqrt(n.toDouble())).toLong()).forEach { i ->
-        if (n % i == 0L) result.addAll(arrayOf(i, n / i))
-    }
-    result.remove(n)
-    return result.toSet().toLongArray()
-}
 
 fun main() {
     testing(1071625, 1103735, "(1081184 1331967)")

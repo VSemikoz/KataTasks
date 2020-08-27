@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.TwiceLinear.dblLinear
 import kotlin.test.assertEquals
 
 /**
@@ -21,17 +22,20 @@ dbl_linear(10) should return 22
 Note:
 Focus attention on efficiency
  */
-fun dblLinear(n: Int): Int = createSeq().drop(n).first()
+object TwiceLinear {
 
-fun calculate(x: Int): ArrayList<Int> = arrayListOf(2 * x + 1, 3 * x + 1)
+    fun dblLinear(n: Int): Int = createSeq().drop(n).first()
 
-fun createSeq() = sequence<Int> {
-    val sortSeq = sortedSetOf(1)
-    while (true) {
-        val minVal = sortSeq.first()
-        yield(minVal)
-        sortSeq.remove(minVal)
-        sortSeq.addAll(calculate(minVal))
+    fun calculate(x: Int): ArrayList<Int> = arrayListOf(2 * x + 1, 3 * x + 1)
+
+    fun createSeq() = sequence<Int> {
+        val sortSeq = sortedSetOf(1)
+        while (true) {
+            val minVal = sortSeq.first()
+            yield(minVal)
+            sortSeq.remove(minVal)
+            sortSeq.addAll(calculate(minVal))
+        }
     }
 }
 

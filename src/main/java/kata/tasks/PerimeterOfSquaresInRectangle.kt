@@ -1,5 +1,7 @@
 package kata.tasks
 
+import java.math.BigInteger
+import kotlin.test.assertEquals
 /**
  * The drawing shows 6 squares the sides of which have a length of 1, 1, 2, 3, 5, 8. It's easy to see that the sum of the perimeters of these squares is : 4 * (1 + 1 + 2 + 3 + 5 + 8) = 4 * 20 = 80
 
@@ -14,9 +16,6 @@ The function perimeter has for parameter n where n + 1 is the number of squares 
 perimeter(5)  should return 80
 perimeter(7)  should return 216
  */
-import java.math.BigInteger
-import kotlin.test.assertEquals
-
 object SumFct {
     fun perimeter(n: Int): BigInteger = fibSeq()
             .take(n + 1)

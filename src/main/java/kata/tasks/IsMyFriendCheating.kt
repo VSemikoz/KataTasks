@@ -1,5 +1,6 @@
 package kata.tasks
 
+import kata.tasks.IsMyFriendCheating.removNb
 import kotlin.test.assertEquals
 
 /**
@@ -9,8 +10,7 @@ He says that the product of a and b should be equal to the sum of all numbers in
 Given a number n, could you tell me the numbers he excluded from the sequence?
 The function takes the parameter: n (n is always strictly greater than 0) and returns an array or a string (depending on the language) of the form:
  */
-
-object RemovedNumbers {
+object IsMyFriendCheating {
     fun removNb(n: Long): Array<LongArray> {
         val result = mutableListOf<LongArray>()
         val total = (1..n).sum()
@@ -33,6 +33,6 @@ fun main() {
 
 
 fun testing(n: Long, expect: String) {
-    val actual = RemovedNumbers.removNb(n)
+    val actual = removNb(n)
     assertEquals(expect, actual.contentDeepToString())
 }
