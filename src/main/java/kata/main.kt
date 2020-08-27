@@ -1,0 +1,6 @@
+package kata
+
+
+fun main() {
+
+}
