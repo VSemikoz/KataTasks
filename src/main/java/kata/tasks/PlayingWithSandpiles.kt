@@ -97,7 +97,6 @@ object PlayingWithSandpiles {
     }
 }
 
-
 fun main() {
     println("should create a custom sandpile")
     val sp1 = PlayingWithSandpiles.Sandpile("130\n121\n322").toString()
