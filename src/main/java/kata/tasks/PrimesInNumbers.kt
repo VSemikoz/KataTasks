@@ -16,7 +16,7 @@ Example: n = 86240 should return "(2**5)(5)(7**2)(11)"
 object PrimeDecomp {
 
     fun factors(l: Int): String {
-        l.getPrime().let { list ->
+        l.factorize().let { list ->
             var result = ""
             list.groupBy { it }.map { it.key to it.value.size }
                     .forEach {
@@ -27,7 +27,7 @@ object PrimeDecomp {
         }
     }
 
-    fun Int.getPrime(): MutableList<Int> {
+    fun Int.factorize(): List<Int> {
         var number = this
         val result = mutableListOf<Int>()
         var i = 2
